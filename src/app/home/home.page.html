@@ -1,0 +1,35 @@
+
+<app-header></app-header>
+<ion-content padding>
+  <ion-row>
+    <ion-col>
+      <h2 align="center">Explore Our Resources</h2>
+    </ion-col>
+  </ion-row>
+  <div *ngFor="let numRow of [0,1,2,3]">
+    <ion-row style="text-align: center">
+      <ion-col *ngFor="let cat of categories.slice(numRow*3, 3+(numRow*3))"
+        (click)='showInfo(cat, numRow)'>
+        <ion-row>
+          <ion-col style="float: none; margin: 0 auto;font-size:28px">
+            <ion-icon [name]="cat.icon"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row >
+          <ion-col style="float: none; margin: 0 auto;">
+            {{cat.title}}
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <div *ngIf="catSelected[numRow]" class='description'>
+        <p style="text-align: center"><b>{{catSelected[numRow].title}} Description</b></p>
+        <p style="text-align: center">{{catSelected[numRow].description}}</p>
+        <div class="center">
+            <ion-button shape="round" fill="outline" (click)="seeMore(catSelected[numRow])">More</ion-button>
+        </div>
+      </div>
+    </ion-row>
+  </div>
+</ion-content>

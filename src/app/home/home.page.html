@@ -1,9 +1,11 @@
 
 <app-header></app-header>
-<ion-content padding>
+<ion-content color="light">
   <ion-row>
     <ion-col>
-      <h2 align="center">Explore Our Resources</h2>
+      <ion-text>
+        <h1 align="center" style="font-weight: 800">Explore Our Resources</h1>
+      </ion-text>
     </ion-col>
   </ion-row>
   <div *ngFor="let numRow of [0,1,2,3]">
@@ -26,9 +28,9 @@
       <div *ngIf="catSelected[numRow]" class='description'>
         <p style="text-align: center"><b>{{catSelected[numRow].title}} Description</b></p>
         <p style="text-align: center">{{catSelected[numRow].description}}</p>
-        <div class="center">
-            <ion-button shape="round" fill="outline" (click)="seeMore(catSelected[numRow])">More</ion-button>
-        </div>
+        <ion-col class="center">
+            <ion-button shape="round" fill="outline" (click)="seeMore(catSelected[numRow].title)">More</ion-button>
+        </ion-col>
       </div>
     </ion-row>
   </div>

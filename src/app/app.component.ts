@@ -25,8 +25,8 @@ export class AppComponent {
       icon: 'create'
     },
     {
-      title: 'Contact',
-      url: '/contact',
+      title: 'About',
+      url: '/about',
       icon: 'contact'
     }
   ];

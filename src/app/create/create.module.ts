@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-
-import { IonicModule } from '@ionic/angular';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderModule } from './../header/header.module'
 
 import { CreatePage } from './create.page';
@@ -14,14 +14,19 @@ const routes: Routes = [
     component: CreatePage
   }
 ];
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
     HeaderModule,
-    RouterModule.forChild(routes)
+    IonicModule,
+    ReactiveFormsModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: CreatePage
+      }
+    ])
   ],
   declarations: [CreatePage]
 })

@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'http://iefs-home.dev.att.com/iefs_api/'
 };

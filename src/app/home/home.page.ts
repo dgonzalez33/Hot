@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ViewToolsPage } from './../view-tools/view-tools.page'
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -20,12 +19,14 @@ export class HomePage {
     {
       title: 'Automation',
       icon: 'git-compare',
-      description: ``
+      description: `Technologies used for reproducing tasks without human assistance.
+       These tasks include clicking on a screen, sending emails, or even deploying the next version
+        of your application.`
     },
     {
       title: 'API',
       icon: 'git-commit',
-      description:  ``
+      description:  `An interface that takes in a request and then delivers a response back to you`
     },
     {
       title: 'Data Management',
@@ -79,14 +80,18 @@ export class HomePage {
     {
       title: 'Other',
       icon: 'help',
-      description: ``
+      description: `Any other tools and resources not classified under any other category.`
     }
   ];
   public showInfo(category, row): void {
-    this.catSelected = this.catSelected.map(x=>false);
-    this.catSelected[row] = category;
+    if (this.catSelected[row] === category) {
+      this.catSelected[row] = false;
+    } else {
+      this.catSelected = this.catSelected.map(x=>false);
+      this.catSelected[row] = category;
+    }
   }
   public seeMore(category): void {
-    this.router.navigateByUrl('/view-tools/'+category);
+    this.router.navigateByUrl('/view-tools/' + category);
   }
 }

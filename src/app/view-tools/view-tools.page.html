@@ -1,10 +1,11 @@
 <app-header></app-header>
 
 <ion-content padding>
+    <form [formGroup]="filterForm">
   <ion-row>
     <ion-col>
         <ion-item>
-            <ion-select  class="myCustomSelect" placeholder="Category" multiple="true">
+            <ion-select formControlName="category" class="myCustomSelect" placeholder="Category">
               <ion-select-option>AI Tools</ion-select-option>
               <ion-select-option>Automation</ion-select-option>
               <ion-select-option>API</ion-select-option>
@@ -21,37 +22,39 @@
     </ion-col>
     <ion-col>
         <ion-item>
-            <ion-input type="text" clearInput placeholder="Organization">
-            </ion-input>
+            <ion-select class="myCustomSelect" formControlName="department" placeholder="Department">
+              <ion-select-option *ngFor="let dept of deptOptions">{{dept}}</ion-select-option>
+            </ion-select>
           </ion-item>
       </ion-col>
       <ion-col>
           <ion-item>
-              <ion-select class="myCustomSelect" placeholder="Price" ok-text="Okay">
+              <ion-select formControlName="price" class="myCustomSelect" placeholder="Price" ok-text="Okay">
                 <ion-select-option value="ascending">$ Low to high</ion-select-option>
                 <ion-select-option value="descending">$ High to low</ion-select-option>
               </ion-select>
             </ion-item>
         </ion-col>   
   </ion-row>
-  <ion-row *ngFor="let j of [1,2,3]">
-    <ion-col *ngFor="let i of [1,2,3,4]">
-      <ion-card>
+</form>
+  <ion-row *ngFor="let tr of toolsRow; let i = index">
+    <ion-col class="col-card" *ngFor="let tool of tools.slice(3*i, 3+(3*i))">
+      <ion-card style="width: 100%">
         <!-- <div style="float:right">
             10
             <ion-icon name="heart" color="secondary" slot="end"></ion-icon>
         </div> -->
           <ion-card-header>
-              <ion-card-subtitle>Organization</ion-card-subtitle>
-              <ion-card-title>Tool Name
+              <ion-card-subtitle>{{tool.department}}</ion-card-subtitle>
+              <ion-card-title><ion-text color="secondary">{{tool.tool_name}} </ion-text>
+                <ion-text color="medium" style="font-size:12px;">(${{tool.cost | currency})</ion-text>
               </ion-card-title>
             </ion-card-header>
-          
+            <!-- <ion-img *ngIf="tool.attachment_path" [src]="tool.attachment_path"></ion-img> -->
             <ion-card-content>
-              Keep close to Nature's heart... and break clear away, once in awhile,
-              and climb a mountain or spend a week in the woods. Wash your spirit clean.
+              {{tool.description}}
             </ion-card-content>
-            <ion-button color="secondary" (click)="viewTool()">
+            <ion-button color="secondary" (click)="viewTool(tool.id)">
               See more
             </ion-button>
       </ion-card>

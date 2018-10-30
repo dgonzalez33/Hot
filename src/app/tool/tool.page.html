@@ -3,35 +3,89 @@
 <ion-content padding fullscreen="true">
   <ion-row>
     <ion-col>
-        <ion-icon name="logo-github"></ion-icon>
-        David Gonzalez
-        <ion-text color="tertiary"><ion-icon name="arrow-forward"></ion-icon>A/I</ion-text>
+        <a [href]="cleanURL('mailto:'+tool.attuid+'.com')">
+          <ion-icon name="mail" style="font-size:14px;" color="secondary"></ion-icon>
+        </a>
+        <a [href]="cleanURL('qto://talk/'+tool.attuid)">
+          <img [src]="'http://presence.q.att.com/presence/'+tool.attuid+'.gif'" alt="Send Q" width="14" height="14" border="0">
+        </a>
+        {{tool.first_name}} {{tool.last_name}} ({{tool.attuid}})
+        <ion-text color="tertiary" (click)="navigateToCat(tool.category)"><ion-icon name="arrow-forward"></ion-icon>{{tool.category}}</ion-text>
     </ion-col>
     <ion-col style="text-align: right">
-      October 21 2018
+      {{tool.date | date:'longDate'}}
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-text>
-      <h2>Power Bi</h2>
+    <ion-text color="primary">
+      <h2>{{tool.tool_name}}</h2>
+      <!-- <h4>${{tool.cost}}</h4> -->
     </ion-text>
-    <!-- <ion-text color="medium" style="padding-left: 5px">
-       INTERNET AND FIELD ENTERTAINMENT
-    </ion-text> -->
-  </ion-row>
-  
-  <ion-row>
-    <p>A sad, sad day: Google+ is shutting down by next August. 
-
-        For those interested in continuing to get my updates on Artificial Intelligence news and articles, you can find it on Twitter now:</p>
   </ion-row>
   <ion-row>
-      <ion-img src="assets/images/powerbi.png"></ion-img>
+      <ion-text color="medium" style="padding-left: 5px; font-size: 11px;">
+        {{tool.department}}
+      </ion-text>
+  </ion-row>
+  <ion-row *ngIf="tool.attachment_path">
+    <img style="max-height: 300px; max-width: 100%;" [src]="tool.attachment_path">
+  </ion-row>
+  <ion-text color="secondary"><h6>Description</h6></ion-text>
+  <ion-row class="description"> 
+    <p>{{tool.description}}</p>
+  </ion-row>
+  <ion-text color="secondary"><h6>Benefit</h6></ion-text>
+  <ion-row class="description">
+    <p>{{tool.benefit}}</p>
   </ion-row>
   <ion-row>
-    <h6>Benefit</h6>
-    <p>A sad, sad day: Google+ is shutting down by next August. 
-
-        For those interested in continuing to get my updates on Artificial Intelligence news and articles, you can find it on Twitter now:</p>
+    <ion-text color="secondary">
+      <h4>Comments ({{comments.length}})</h4>
+    </ion-text>
   </ion-row>
+  <ion-row>
+    <ion-list lines="full">
+        <ion-item style="width: 100%" *ngFor="let comment of comments">
+            <ion-avatar slot="start">
+              <img [src]="cleanURL('https://tspace.web.att.com/profiles/photo.do?uid='+comment.attuid)">
+            </ion-avatar>
+            <ion-label>
+              <h2>{{comment.first_name}} {{comment.last_name}} ({{comment.attuid}})</h2>
+              <h5>{{comment.date | date:'longDate'}}</h5>
+              <p>{{comment.comment}}</p>
+            </ion-label>
+          </ion-item>
+      </ion-list>
+    <!-- <ion-card style="width: 100%;">
+      <ion-card-header>
+        <ion-card-subtitle>date</ion-card-subtitle>
+        <ion-card-title><ion-text color="primary">David Gonzalez (dg978t)</ion-text>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        I LOVE IT!!
+      </ion-card-content>
+    </ion-card> -->
+  </ion-row>
+  <div *ngIf="!useFooter">
+    <hr>
+    <ion-text color="secondary">
+      <h4>Leave a comment</h4>
+    </ion-text>
+    <ion-row>
+        <ion-textarea [(ngModel)]="commentText" style="margin-left: 10px; margin-right: 10px" 
+        class="description" color="medium" placeholder="Comment..."></ion-textarea>
+    </ion-row>
+    <ion-row>
+      <ion-button color="tertiary" (click)="comment()">Add</ion-button>
+    </ion-row>
+  </div>
 </ion-content>
+<ion-footer *ngIf="useFooter">
+  <ion-toolbar>
+    <ion-item>
+      <ion-input [(ngModel)]="commentText" type="text" placeholder="Write Comment"></ion-input>
+      <ion-icon (click)="comment()"></ion-icon>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

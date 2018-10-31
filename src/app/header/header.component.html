@@ -14,6 +14,6 @@
     </ion-item>
   </ion-toolbar>
   <ion-toolbar color="primary">
-    <ion-searchbar #searchBar (search)="search($event)" animated="true" ></ion-searchbar>
+    <ion-searchbar #searchBar (keyup.enter)="search()" animated="true" ></ion-searchbar>
   </ion-toolbar>
 </ion-header>

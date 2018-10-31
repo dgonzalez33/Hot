@@ -47,7 +47,7 @@
           <ion-card-header>
               <ion-card-subtitle>{{tool.department}}</ion-card-subtitle>
               <ion-card-title><ion-text color="secondary">{{tool.tool_name}} </ion-text>
-                <ion-text color="medium" style="font-size:12px;">(${{tool.cost | currency})</ion-text>
+                <ion-text color="medium" style="font-size:12px;">({{tool.cost | currency}})</ion-text>
               </ion-card-title>
             </ion-card-header>
             <!-- <ion-img *ngIf="tool.attachment_path" [src]="tool.attachment_path"></ion-img> -->

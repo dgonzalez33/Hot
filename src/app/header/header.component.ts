@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   goHome() {
     this.router.navigateByUrl('/');
   }
-  search(event) {
-    this.router.navigate(['/view-tools', 'fuzzy', event.target.value], { queryParams: { fuzzy: event.target.value }});
+  search() {
+    this.router.navigate(['/view-tools', 'fuzzy', this.searchBar.value], { queryParams: { fuzzy: this.searchBar.value }});
   }
 }
